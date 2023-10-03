@@ -7,47 +7,42 @@ variable "kube_monitoring_stack_values" {
       enabled: true
       ingress:
         enabled: true
-        ingressClassName: alb
+        ingressClassName: nginx
         annotations:
-          alb.ingress.kubernetes.io/scheme: internet-facing
-          alb.ingress.kubernetes.io/target-type: ip
-          alb.ingress.kubernetes.io/group.name: monitoring-group
-          alb.ingress.kubernetes.io/group.order: '1'
-          alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS":443}]'
-          alb.ingress.kubernetes.io/ssl-redirect: '443'
-          alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-1:819401076850:certificate/43105b73-cfa5-4dcc-a66c-2e7a4dd62fe8
+          cert-manager.io/cluster-issuer: letsencrypt-production
         hosts:
           - grafana.am-devops.com
+        tls:
+          - secretName: grafana-tls
+            hosts:
+              - grafana.am-devops.com
 
     alertmanager:
       enabled: true
       ingress:
         enabled: true
-        ingressClassName: alb
+        ingressClassName: nginx
         annotations:
-          alb.ingress.kubernetes.io/scheme: internet-facing
-          alb.ingress.kubernetes.io/target-type: ip
-          alb.ingress.kubernetes.io/group.name: monitoring-group
-          alb.ingress.kubernetes.io/group.order: '2'
-          alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS":443}]'
-          alb.ingress.kubernetes.io/ssl-redirect: '443'
-          alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-1:819401076850:certificate/43105b73-cfa5-4dcc-a66c-2e7a4dd62fe8
+          cert-manager.io/cluster-issuer: letsencrypt-production
         hosts:
           - alertmanager.am-devops.com
+        tls:
+          - secretName: alertmanager-tls
+            hosts:
+              - alertmanager.am-devops.com
+
     prometheus:
       ingress:
         enabled: true
-        ingressClassName: alb
+        ingressClassName: nginx
         annotations:
-          alb.ingress.kubernetes.io/scheme: internet-facing
-          alb.ingress.kubernetes.io/target-type: ip
-          alb.ingress.kubernetes.io/group.name: monitoring-group
-          alb.ingress.kubernetes.io/group.order: '3'
-          alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS":443}]'
-          alb.ingress.kubernetes.io/ssl-redirect: '443'
-          alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-1:819401076850:certificate/43105b73-cfa5-4dcc-a66c-2e7a4dd62fe8
+          cert-manager.io/cluster-issuer: letsencrypt-production
         hosts:
           - prometheus.am-devops.com
+        tls:
+          - secretName: prometheus-tls
+            hosts:
+              - prometheus.am-devops.com
       prometheusSpec:
         replicas: 2
         replicaExternalLabelName: prometheus_replica

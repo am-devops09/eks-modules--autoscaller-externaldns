@@ -26,3 +26,6 @@ kubectl patch svc argo-cd-argocd-argocd-server -n argocd --type='json' -p '[{"op
 
 kubectl get secrets n argocd
 kub get secrets -n argocd ------ -o yaml 
+
+## port forawrd svc
+kubectl -n monitoring port-forward service/prometheus-k8s 9090:9090

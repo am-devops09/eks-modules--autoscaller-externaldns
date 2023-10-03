@@ -43,8 +43,11 @@ metadata:
     alb.ingress.kubernetes.io/target-type: ip
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS":443}]'
     alb.ingress.kubernetes.io/ssl-redirect: '443'
+    alb.ingress.kubernetes.io/group.name: monitoring-group
     alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-1:819401076850:certificate/43105b73-cfa5-4dcc-a66c-2e7a4dd62fe8
-    external-dns.alpha.kubernetes.io/hostname: techno.am-devops.com
+    external-dns.alpha.kubernetes.io/hostname: fifi3.am-devops.com
+    alb.ingress.kubernetes.io/group.order: '11'
+
 spec:
   ingressClassName: alb
   rules:
