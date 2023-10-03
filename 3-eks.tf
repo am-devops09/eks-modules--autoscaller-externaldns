@@ -22,13 +22,13 @@ module "eks" {
     general = {
       desired_size = 1
       min_size     = 1
-      max_size     = 10
+      max_size     = 5
 
       labels = {
         role = "general"
       }
 
-      instance_types = ["t3.small"]
+      instance_types = ["t3.medium"]
       capacity_type  = "ON_DEMAND"
     }
 
@@ -48,7 +48,7 @@ module "eks" {
         effect = "NO_SCHEDULE"
       }]
 
-      instance_types = ["t3.micro"]
+      instance_types = ["t3.medium"]
       capacity_type  = "SPOT"
     }
   }

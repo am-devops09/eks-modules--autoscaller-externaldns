@@ -8,7 +8,7 @@ kubectl edit -n kube-system configmap/aws-auth
 
 # change the user
 
-aws eks --region us-east-1 update-kubeconfig --name cluster-1-test 
+aws eks --region us-east-1 update-kubeconfig --name my-eks
 # show config
 kubectl config view --minify 
 

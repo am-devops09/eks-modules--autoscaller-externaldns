@@ -1,6 +1,6 @@
 module "aws_load_balancer_controller_irsa_role" {
   source  = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks"
-  version = "5.3.1"
+  version = "5.30.0" ## here the external dns works //and i also changed the policy attached with new one found in github
 
   role_name = "aws-load-balancer-controller"
 
@@ -20,7 +20,7 @@ resource "helm_release" "aws_load_balancer_controller" {
   repository = "https://aws.github.io/eks-charts"
   chart      = "aws-load-balancer-controller"
   namespace  = "kube-system"
-  version    = "2.4.4"
+  version    = "1.6.1"
 
   set {
     name  = "replicaCount"
@@ -41,4 +41,9 @@ resource "helm_release" "aws_load_balancer_controller" {
     name  = "serviceAccount.annotations.eks\\.amazonaws\\.com/role-arn"
     value = module.aws_load_balancer_controller_irsa_role.iam_role_arn
   }
+  
+    # depends_on = [
+    # aws_eks_node_group.private-nodes,
+    # aws_iam_role_policy_attachment.aws_load_balancer_controller_attach
+  # ]
 }
