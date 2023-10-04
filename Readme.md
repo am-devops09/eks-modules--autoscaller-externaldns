@@ -29,3 +29,6 @@ kub get secrets -n argocd ------ -o yaml
 
 ## port forawrd svc
 kubectl -n monitoring port-forward service/prometheus-k8s 9090:9090
+
+## decode base64 secret
+echo Z0JqT2xIOXUyZDkzT0kwSw== |base64 --decode

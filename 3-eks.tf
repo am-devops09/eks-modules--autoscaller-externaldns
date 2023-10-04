@@ -15,7 +15,7 @@ module "eks" {
   enable_irsa = true
 
   eks_managed_node_group_defaults = {
-    disk_size = 20
+    disk_size = 50
   }
 
   eks_managed_node_groups = {
@@ -28,7 +28,7 @@ module "eks" {
         role = "general"
       }
 
-      instance_types = ["t3.medium"]
+      instance_types = ["t3.xlarge"]
       capacity_type  = "ON_DEMAND"
     }
 
@@ -48,7 +48,7 @@ module "eks" {
         effect = "NO_SCHEDULE"
       }]
 
-      instance_types = ["t3.medium"]
+      instance_types = ["t3.xlarge"]
       capacity_type  = "SPOT"
     }
   }
